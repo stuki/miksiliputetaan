@@ -94,17 +94,58 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
 
-#title {
-    
 }
 
+.content {
+    top: 0px;
+    position: absolute;
+    height: 93%;
+    width: 100%;
+}
 
+#title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
+.info {
+    position: absolute;
+    width: 40%;
+    height: 30%;
+    text-align: justify;
+    top: 60%;
+    left: 50%;
+    margin-right: -50%;
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+}
 
+.footer {
+    position: absolute;
+    bottom: 0px;
+    height: 7%;
+    width: 100%;
+}
 
+.footer p {
+    text-align: center;
+}
 
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
 
+.footer a:hover {
+    color: blue;
+}
 
 
 
