@@ -1,3 +1,61 @@
+var test = ["02/28/2015",
+            "05/01/2015",
+            "05/10/2015",
+            "06/04/2015",
+            "06/20/2015",
+            "12/06/2015",
+            "02/05/2015",
+            "03/19/2015",
+            "04/09/2015",
+            "04/27/2015",
+            "05/09/2015",
+            "05/12/2015",
+            "05/17/2015",
+            "07/06/2015",
+            "10/10/2015",
+            "10/24/2015",
+            "11/06/2015",
+            "11/08/2015",
+            "12/08/2015",
+            "02/28/2016",
+            "05/01/2016",
+            "05/08/2016",
+            "06/04/2016",
+            "06/25/2016",
+            "12/06/2016",
+            "02/05/2016",
+            "03/19/2016",
+            "04/09/2016",
+            "04/27/2016",
+            "05/09/2016",
+            "05/12/2016",
+            "05/15/2016",
+            "07/06/2016",
+            "10/10/2016",
+            "10/24/2016",
+            "11/06/2016",
+            "11/13/2016",
+            "12/08/2016",
+            "02/28/2017",
+            "05/01/2017",
+            "05/14/2017",
+            "06/04/2017",
+            "06/24/2017",
+            "12/06/2017",
+            "02/05/2017",
+            "03/19/2017",
+            "04/09/2017",
+            "04/27/2017",
+            "05/09/2017",
+            "05/12/2017",
+            "05/21/2017",
+            "07/06/2017",
+            "10/10/2017",
+            "10/24/2017",
+            "11/06/2017",
+            "11/12/2017",
+            "12/08/2017"]
+
 var today = Date.today()
 var todayShort = today.toString("ddMM")
 
@@ -21,13 +79,13 @@ var midsummer = ["2006","2106","2206","2306","2406","2506","2606"]
 
 function isXSunday (number, month) {
     if ( number == 2 ) {
-        var sunday = Date.today().second().sunday().toISOString()
-        if ( today.toISOString() == sunday && today.getMonth() == month ) {
+        var sunday = Date.today().second().sunday()
+        if ( +today == +sunday && today.getMonth() == month ) {
             return true
         } else { return false }
     } else if ( number == 3 ) {
-        var sunday = Date.today().third().sunday().toISOString()
-        if ( today.toISOString() == sunday && today.getMonth() == month ) {
+        var sunday = Date.today().third().sunday()
+        if ( +today == +sunday && today.getMonth() == month ) {
             return true
         } else { return false }
     }
@@ -60,13 +118,13 @@ else if ( midsummer.indexOf(todayShort) > -1 ) {
         insertElements("no_flag", "Tänään ei ole liputuspäivä")
     }
 }
-else if ( isXSunday(3,5) ) {
+else if ( isXSunday(3,4) ) {
     insertElements("muisto", "Tänään on Kaatuneitten muistopäivä")
 }
-else if ( isXSunday(2,5) ) {
+else if ( isXSunday(2,4) ) {
     insertElements("aiti", "Tänään on Äitienpäivä!")
 }
-else if ( isXSunday(2,11) ) {
+else if ( isXSunday(2,10) ) {
     insertElements("isa", "Tänään on Isänpäivä!")
 }
 else {
