@@ -1,132 +1,113 @@
-var test = ["02/28/2015",
-            "05/01/2015",
-            "05/10/2015",
-            "06/04/2015",
-            "06/20/2015",
-            "12/06/2015",
-            "02/05/2015",
-            "03/19/2015",
-            "04/09/2015",
-            "04/27/2015",
-            "05/09/2015",
-            "05/12/2015",
-            "05/17/2015",
-            "07/06/2015",
-            "10/10/2015",
-            "10/24/2015",
-            "11/06/2015",
-            "11/08/2015",
-            "12/08/2015",
-            "02/28/2016",
-            "05/01/2016",
-            "05/08/2016",
-            "06/04/2016",
-            "06/25/2016",
-            "12/06/2016",
-            "02/05/2016",
-            "03/19/2016",
-            "04/09/2016",
-            "04/27/2016",
-            "05/09/2016",
-            "05/12/2016",
-            "05/15/2016",
-            "07/06/2016",
-            "10/10/2016",
-            "10/24/2016",
-            "11/06/2016",
-            "11/13/2016",
-            "12/08/2016",
-            "02/28/2017",
-            "05/01/2017",
-            "05/14/2017",
-            "06/04/2017",
-            "06/24/2017",
-            "12/06/2017",
-            "02/05/2017",
-            "03/19/2017",
-            "04/09/2017",
-            "04/27/2017",
-            "05/09/2017",
-            "05/12/2017",
-            "05/21/2017",
-            "07/06/2017",
-            "10/10/2017",
-            "10/24/2017",
-            "11/06/2017",
-            "11/12/2017",
-            "12/08/2017"]
-
 var today = Date.today()
-var todayShort = today.toString("ddMM")
 
-var flagdays = ["2802","Tänään on Kalevalan päivä, suomalaisen kulttuurin päivä!",
-                "0105","Tänään on Vappu, suomalaisen työn päivä!",
-                "0406","Tänään on Puolustusvoimain lippujuhlan päivä!",
-                "0612","Tänään on Itsenäisyyspäivä!",
-                "0502","Tänään on J.L. Runebergin päivä!",
-                "1903","Tänään on Minna Canthin päivä, tasa-arvon päivä!",
-                "0904","Tänään on Mikael Agricolan päivä, suomen kielen päivä!",
-                "2704","Tänään on Kansallinen veteraanipäivä!",
-                "0905","Tänään on Eurooppa-päivä!",
-                "1205","Tänään on J.V. Snellmanin päivä, suomalaisuuden päivä!",
-                "0607","Tänään on Eino Leinon päivä, runon ja suven päivä!",
-                "1010","Tänään on Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä!",
-                "2410","Tänään on YK:n päivä!",
-                "0611","Tänään on Ruotsalaisuuden päivä, Kustaa Aadolfin päivä!",
-                "0812","Tänään on Jean Sibeliuksen päivä, suomalaisen musiikin päivä!"]
-
-var midsummer = ["2006","2106","2206","2306","2406","2506","2606"]
-
-function isXSunday (number, month) {
-    if ( number == 2 ) {
-        var sunday = Date.today().second().sunday()
-        if ( +today == +sunday && today.getMonth() == month ) {
-            return true
-        } else { return false }
-    } else if ( number == 3 ) {
-        var sunday = Date.today().third().sunday()
-        if ( +today == +sunday && today.getMonth() == month ) {
-            return true
-        } else { return false }
+function juhannus() {
+    var jun = Date.parse("Jun 01"), start = Date.parse("Jun 20"), stop = Date.parse("Jun 26"), i = 1
+    while (i < 5) {
+        if (jun.moveToNthOccurrence(6, i).between(start, stop)) {
+            return jun.moveToNthOccurrence(6, i)
+        }
+        i++
     }
 }
 
-function insertElements(name,title) {
+var flagdays = {
+                "Kalevalan päivä": {
+                    date: Date.parse("Feb 28"),
+                    title: "Tänään on Kalevalan päivä, suomalaisen kulttuurin päivä!",
+                    filename: "kalevala" },
+                "Vappu": {
+                    date: Date.parse("May 01"),
+                    title: "Tänän on Vappu, suomalaisen työn päivä!",
+                    filename: "vappu" },
+                "Puolustusvoimain lippujuhlan päivä": {
+                    date: Date.parse("Jun 04"),
+                    title: "Tänään on Puolustusvoimain lippujuhlan päivä!",
+                    filename: "puolustusvoima" },
+                "Itsenäisyyspäivä": {
+                    date: Date.parse("Dec 06"),
+                    title: "Tänään on Itsenäisyyspäivä!",
+                    filename: "itsenaisyys" },
+                "J.L. Runebergin päivä": {
+                    date: Date.parse("Feb 05"),
+                    title: "Tänään on J.L. Runebergin päivä!",
+                    filename: "runeberg" },
+                "Minna Canthin päivä": {
+                    date: Date.parse("Mar 19"),
+                    title: "Tänään on Minna Canthin päivä, tasa-arvon päivä!",
+                    filename: "canth" },
+                "Mikael Agricolan päivä": {
+                    date: Date.parse("Apr 09"),
+                    title: "Tänään on Mikael Agricolan päivä, suomen kielen päivä!",
+                    filename: "agricola" },
+                "Kansallinen veteraanipäivä": {
+                    date: Date.parse("Apr 27"),
+                    title: "Tänään on Kansallinen veteraanipäivä!",
+                    filename: "veteraanipaiva" },
+                "Eurooppa-päivä": {
+                    date: Date.parse("May 09"),
+                    title: "Tänään on Eurooppa-päivä!",
+                    filename: "eurooppa" },
+                "J.V. Snellmanin päivä": {
+                    date: Date.parse("May 12"),
+                    title: "Tänään on J.V. Snellmanin päivä, suomalaisuuden päivä!",
+                    filename: "snellman" },
+                "Eino Leinon päivä": {
+                    date: Date.parse("Jul 06"),
+                    title: "Tänään on Eino Leinon päivä, runon ja suven päivä!",
+                    filename: "leino" },
+                "Aleksis Kiven päivä": {
+                    date: Date.parse("Oct 10"),
+                    title: "Tänään on Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä!",
+                    filename: "aleksiskivi" },
+                "YK:n päivä": {
+                    date: Date.parse("Oct 24"),
+                    title: "Tänään on YK:n päivä!",
+                    filename: "yk" },
+                "Ruotsalaisuuden päivä": {
+                    date: Date.parse("Nov 06"),
+                    title: "Tänään on Ruotsalaisuuden päivä, Kustaa Aadolfin päivä!",
+                    filename: "ruotsalaisuus" },
+                "Jean Sibeliuksen päivä": {
+                    date: Date.parse("Dec 08"),
+                    title: "Tänään on Jean Sibeliuksen päivä, suomalaisen musiikin päivä!",
+                    filename: "sibelius" },
+                "Kaatuneitten muistopäivä": {
+                    date: Date.parse("May 01").moveToNthOccurrence(0,3),
+                    title: "Tänään on Kaatuneitten muistopäivä",
+                    filename: "kaatuneitten_muistopaiva" },
+                "Äitienpäivä": {
+                    date: Date.parse("May 01").moveToNthOccurrence(0,2),
+                    title: "Tänään on Äitienpäivä!",
+                    filename: "aitienpaiva" },
+                "Isänpäivä": {
+                    date: Date.parse("Nov 01").moveToNthOccurrence(0,2),
+                    title: "Tänään on Isänpäivä!",
+                    filename: "isanpaiva" },
+                "Juhannus": {
+                    date: juhannus(),
+                    title: "Tänään on Juhannus, Suomen lipun päivä!",
+                    filename: "juhannus" },
+                "no_flag": {
+                    date: null,
+                    title: "Tänään ei ole liputuspäivä",
+                    filename: "no_flag" }
+                }
+
+function insertElements(name, title) {
     var css = document.createElement( "link" )
-    css.href = name + ".css"
-    css.type = "text/css"
-    css.rel = "stylesheet"
+        css.href = name + ".css"
+        css.type = "text/css"
+        css.rel = "stylesheet"
 
     document.getElementsByTagName( "head" )[0].appendChild(css);
     $('#title').text(title)
 }
 
-if ( flagdays.indexOf(todayShort) > -1 ) {
-    var css = document.createElement( "link" )
-    css.href = todayShort + ".css"
-    css.type = "text/css"
-    css.rel = "stylesheet"
-
-    document.getElementsByTagName( "head" )[0].appendChild(css);
-    $('#title').text( flagdays[flagdays.indexOf(todayShort) + 1] )
-}
-else if ( midsummer.indexOf(todayShort) > -1 ) {
-    if ( today.getDay() == 6 ) {
-        insertElements("jussi", "Tänään on Juhannus, Suomen lipun päivä!")
+Object.keys(flagdays).forEach(function (key) {
+    var flagday = flagdays[key], date = flagday.date
+    if (+today == +date) {
+        insertElements(flagday.filename, flagday.title)
+    } else if ( document.getElementById('title').innerHTML.length == 0 ) {
+        insertElements(flagdays["no_flag"].filename, flagdays["no_flag"].title)
     }
-    else {
-        insertElements("no_flag", "Tänään ei ole liputuspäivä")
-    }
-}
-else if ( isXSunday(3,4) ) {
-    insertElements("muisto", "Tänään on Kaatuneitten muistopäivä")
-}
-else if ( isXSunday(2,4) ) {
-    insertElements("aiti", "Tänään on Äitienpäivä!")
-}
-else if ( isXSunday(2,10) ) {
-    insertElements("isa", "Tänään on Isänpäivä!")
-}
-else {
-    insertElements("no_flag", "Tänään ei ole liputuspäivä")
-}
+})
